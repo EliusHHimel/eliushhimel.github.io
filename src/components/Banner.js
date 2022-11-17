@@ -54,7 +54,8 @@ export const Banner = () => {
           <Col xs={12} md={6} xl={7}>
             <TrackVisibility>
               {({ isVisible }) =>
-                <div className={isVisible ? "animate__animated animate__fadeIn" : ""}>
+                <div className={isVisible ? "animate__animated" : ""}>
+                  {/* <span className="tagline">...</span> */}
                   <h1 className="name">{`Hi! I'm Md Elius Hossen`} <br /> <span className="txt-rotate" dataPeriod="1000" data-rotate='[ "Web Developer", "Technology Enthusiast" ]'><span className="wrap">{text}</span></span></h1>
                   <p>I am a passionate Web Developer and Technology Enthusiast. I actively seek out new technologies and stay up-to-date on industry trends and advancements. It allowed me to stay ahead of the curve and deliver exceptional work to all of my employers.</p>
                   <button onClick={() => window.location.href = '#connect'}>Contact Me <ArrowRightCircle size={25} /></button>
@@ -64,7 +65,7 @@ export const Banner = () => {
           <Col xs={12} md={6} xl={5}>
             <TrackVisibility>
               {({ isVisible }) =>
-                <div className={isVisible ? "animate__animated animate__zoomIn" : ""}>
+                <div className={isVisible ? "animate__animated" : ""}>
                   <img src={headerImg} alt="Header Img" />
                 </div>}
             </TrackVisibility>
