@@ -1,4 +1,4 @@
-import { Container, Row, Col, Tab, Nav } from "react-bootstrap";
+import { Container, Row, Col, Tab } from "react-bootstrap";
 import { ProjectCard } from "./ProjectCard";
 import projImg1 from "../assets/img/projects/Creative-Agency.png";
 import projImg2 from "../assets/img/projects/Asterisk-Travels.png";
@@ -30,8 +30,8 @@ export const Projects = () => {
       title: "Drones World",
       description: "Drone Reseller website.",
       imgUrl: projImg3,
-      liveUrl: "https://optifine-health.web.app/",
-      codeUrl: "https://github.com/EliusHHimel/optifine-health-care"
+      liveUrl: "https://drones-world.eliushhimel.com/",
+      codeUrl: "https://github.com/EliusHHimel/drones-world"
     },
     {
       title: "Optifine Helth Care",
@@ -99,7 +99,7 @@ export const Projects = () => {
           </Col>
         </Row>
       </Container>
-      <img className="background-image-right" src={colorSharp2}></img>
+      <img className="background-image-right" alt="" src={colorSharp2}></img>
     </section>
   )
 }
