@@ -752,6 +752,10 @@ nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
   margin-top: 20px;
 }
 
+.wrap {
+  font-size: 48px;
+}
+
 @media only screen and (max-width: 768px) {
 
   /* For mobile phones: */
