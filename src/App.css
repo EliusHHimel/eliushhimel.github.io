@@ -647,6 +647,18 @@ nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
   width: 100%;
 }
 
+.contact-info i {
+  font-size: 20px;
+}
+
+.contact-info a {
+  color: white;
+  text-decoration: none;
+}
+
+.contact-info a:hover {
+  color: #14dcaa;
+}
 
 /************ Footer Css ************/
 .footer {

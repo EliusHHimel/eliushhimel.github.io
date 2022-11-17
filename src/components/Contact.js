@@ -59,6 +59,12 @@ export const Contact = () => {
               {({ isVisible }) =>
                 <div className={isVisible ? "animate__animated animate__fadeIn" : ""}>
                   <h2>Get In Touch</h2>
+                  <p className="contact-info">If you have any query please contact me.
+                    <br />
+                    <br />
+                    <i class="fa-duotone fa-envelope"></i> <a href="mailto:contact@eliushhimel.com">contact@eliushhimel.com</a> <br />
+                    <i class="fa-duotone fa-phone"></i> <a href="tel:+8801866077018">+8801866077018</a>
+                  </p>
                   <form onSubmit={handleSubmit}>
                     <Row>
                       <Col size={12} sm={6} className="px-1">
