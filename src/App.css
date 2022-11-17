@@ -465,6 +465,26 @@ nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
   border: 1px solid rgba(255, 255, 255, 1);
 }
 
+.project-url-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.project-url {
+  text-decoration: none;
+  color: white;
+  margin: 10px;
+  padding: 10px;
+  background-color: #00000071;
+  border-radius: 10px;
+}
+
+.project-url:hover {
+  background-color: #ffffff71;
+  color: black;
+}
+
 .nav-link#projects-tabs-tab-first {
   border: 1px solid rgba(255, 255, 255, 0.5);
   border-radius: 55px 0px 0px 55px;
