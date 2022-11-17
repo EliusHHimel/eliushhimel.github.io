@@ -9,10 +9,10 @@ export const Banner = () => {
   const [loopNum, setLoopNum] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
   const [text, setText] = useState('');
-  const [delta, setDelta] = useState(300 - Math.random() * 100);
+  const [delta, setDelta] = useState(300 - Math.random() * 10);
   const [index, setIndex] = useState(1);
   const toRotate = ["Web Developer", "Technology Enthusiast"];
-  const period = 2000;
+  const period = 1000;
 
   useEffect(() => {
     let ticker = setInterval(() => {
@@ -41,7 +41,7 @@ export const Banner = () => {
       setIsDeleting(false);
       setLoopNum(loopNum + 1);
       setIndex(1);
-      setDelta(500);
+      setDelta(200);
     } else {
       setIndex(prevIndex => prevIndex + 1);
     }
@@ -56,7 +56,7 @@ export const Banner = () => {
               {({ isVisible }) =>
                 <div className={isVisible ? "animate__animated animate__fadeIn" : ""}>
                   <span className="tagline">Welcome to my Portfolio</span>
-                  <h1>{`Hi! I'm Md Elius Hossen`} <br /> <span className="txt-rotate" dataPeriod="1000" data-rotate='[ "Web Developer", "Technology Enthusiast" ]'><span className="wrap">{text}</span></span></h1>
+                  <h1>{`Hi! I'm Md Elius Hossen`} <br /> <span className="txt-rotate" dataPeriod="200" data-rotate='[ "Web Developer", "Technology Enthusiast" ]'><span className="wrap">{text}</span></span></h1>
                   <p>I am a passionate Web Developer andTechnolody Enthusiast. I actively seek out new technologies and stay up-to-date on industry trends and advancements. It allowed me to stay ahead of the curve and deliver exceptional work to all of my employers.</p>
                   <button onClick={() => window.location.href = '#connect'}>Contact Me <ArrowRightCircle size={25} /></button>
                 </div>}
