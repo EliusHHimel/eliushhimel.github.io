@@ -4,7 +4,6 @@ import navIcon1 from '../assets/img/nav-icon1.svg';
 import navIcon2 from '../assets/img/nav-icon2.svg';
 import navIcon3 from '../assets/img/nav-icon3.svg';
 import navIcon4 from '../assets/img/nav-icon4.svg';
-import { HashLink } from 'react-router-hash-link';
 export const NavBar = () => {
 
   const [activeLink, setActiveLink] = useState('home');
@@ -40,6 +39,7 @@ export const NavBar = () => {
             <Nav.Link href="#home" className={activeLink === 'home' ? 'active navbar-link' : 'navbar-link'} onClick={() => onUpdateActiveLink('home')}>Home</Nav.Link>
             <Nav.Link href="#skills" className={activeLink === 'skills' ? 'active navbar-link' : 'navbar-link'} onClick={() => onUpdateActiveLink('skills')}>Skills</Nav.Link>
             <Nav.Link href="#project" className={activeLink === 'projects' ? 'active navbar-link' : 'navbar-link'} onClick={() => onUpdateActiveLink('projects')}>Projects</Nav.Link>
+            <Nav.Link href="#contact" className={activeLink === 'contact' ? 'active navbar-link' : 'navbar-link'} onClick={() => onUpdateActiveLink('contact')}>Contact Me</Nav.Link>
           </Nav>
           <span className="navbar-text">
             <div className="social-icon">
@@ -48,9 +48,6 @@ export const NavBar = () => {
               <a target='_blank' rel='noreferrer' href="https://www.instagram.com/eliushhimel/"><img src={navIcon3} alt="Icon" /></a>
               <a target='_blank' rel='noreferrer' href="https://www.github.com/eliushhimel/"><img src={navIcon4} alt="Icon" /></a>
             </div>
-            <HashLink to='#connect'>
-              <button className="vvd"><span>Let’s Connect</span></button>
-            </HashLink>
           </span>
         </Navbar.Collapse>
       </Container>
