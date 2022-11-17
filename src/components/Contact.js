@@ -47,7 +47,7 @@ export const Contact = () => {
                         <input type="text" name="Last Name" placeholder="Last Name" />
                       </Col>
                       <Col size={12} sm={6} className="px-1">
-                        <input type="email" placeholder="Email Address" />
+                        <input type="email" name="Email" placeholder="Email Address" />
                       </Col>
                       <Col size={12} sm={6} className="px-1">
                         <input type="tel" name="Mobile" placeholder="Phone No." />
