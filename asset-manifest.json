@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/static/css/main.ab7647b5.css",
-    "main.js": "/static/js/main.01e64ba2.js",
+    "main.js": "/static/js/main.36329f17.js",
     "static/js/787.fb771931.chunk.js": "/static/js/787.fb771931.chunk.js",
     "static/media/Asterisk-Travels.png": "/static/media/Asterisk-Travels.2a8bfbe7217e3b54e059.png",
     "static/media/drones-world.png": "/static/media/drones-world.0585da1a387881f16a05.png",
@@ -35,11 +35,11 @@
     "static/media/nav-icon1.svg": "/static/media/nav-icon1.721d5414c26365f117e71d46b6641cb2.svg",
     "static/media/nav-icon2.svg": "/static/media/nav-icon2.178f497aa17b70c42df2a1a8c926ed01.svg",
     "main.ab7647b5.css.map": "/static/css/main.ab7647b5.css.map",
-    "main.01e64ba2.js.map": "/static/js/main.01e64ba2.js.map",
+    "main.36329f17.js.map": "/static/js/main.36329f17.js.map",
     "787.fb771931.chunk.js.map": "/static/js/787.fb771931.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.ab7647b5.css",
-    "static/js/main.01e64ba2.js"
+    "static/js/main.36329f17.js"
   ]
 }
