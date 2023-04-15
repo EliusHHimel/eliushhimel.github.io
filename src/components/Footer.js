@@ -19,7 +19,7 @@ export const Footer = () => {
               <a target='_blank' rel="noreferrer" href="https://www.instagram.com/eliushhimel/"><img src={navIcon3} alt="Icon" /></a>
               <a target='_blank' rel="noreferrer" href="https://www.github.com/eliushhimel/"><img src={navIcon4} alt="Icon" /></a>
             </div>
-            <p>Copyright 2022. All Rights Reserved</p>
+            <p>Copyright 2023. All Rights Reserved</p>
           </Col>
         </Row>
       </Container>
