@@ -5,6 +5,7 @@ import projImg2 from "../assets/img/projects/Asterisk-Travels.png";
 import projImg3 from "../assets/img/projects/drones-world.png";
 import projImg4 from "../assets/img/projects/Optifine-Health-care.png";
 import projImg5 from "../assets/img/projects/Amazing-Football.png";
+import spaceImg from "../assets/img/projects/space.png";
 import colorSharp2 from "../assets/img/color-sharp2.png";
 import 'animate.css';
 import TrackVisibility from 'react-on-screen';
@@ -12,6 +13,13 @@ import TrackVisibility from 'react-on-screen';
 export const Projects = () => {
 
   const projects = [
+    {
+      title: "Stella - Space For Everyone",
+      description: "Stella website.",
+      imgUrl: spaceImg,
+      liveUrl: "https://eliushhimel.com/Space",
+      codeUrl: "https://github.com/EliusHHimel/space"
+    },
     {
       title: "Creative Agency",
       description: "Creative agency website.",
