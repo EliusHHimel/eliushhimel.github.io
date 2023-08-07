@@ -31,7 +31,9 @@ export const Contact = () => {
                     <br />
                     <br />
                     <i className="fa-duotone fa-envelope"></i> <a href="mailto:contact@eliushhimel.com">contact@eliushhimel.com</a> <br />
-                    <i className="fa-duotone fa-phone"></i> <a href="tel:+8801866077018">+8801866077018</a>
+                    <i className="fa-duotone fa-phone" style={{
+                      marginTop: '10px'
+                    }}></i> <a href="tel:+8801866077018">+8801866077018</a>
                   </p>
                   <form action="https://formsubmit.co/contact@eliushhimel.com" method="POST">
                     <input type="text" name="_honey" style={{ display: "none" }} />
