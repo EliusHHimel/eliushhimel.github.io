@@ -1,23 +1,7 @@
 import React, { useRef } from 'react';
 import { useFrame } from '@react-three/fiber';
-import { RoundedBox } from '@react-three/drei';
 
 function Projects() {
-  const projects = [
-    {
-      title: '3D Portfolio',
-      description: 'An interactive 3D portfolio website built with Three.js and React Three Fiber'
-    },
-    {
-      title: 'Web Application',
-      description: 'Full-stack web application with modern technologies and best practices'
-    },
-    {
-      title: 'Mobile App',
-      description: 'Cross-platform mobile application with seamless user experience'
-    }
-  ];
-
   return (
     <>
       {/* Project cards in 3D space */}
@@ -27,9 +11,6 @@ function Projects() {
 
       {/* Grid background */}
       <Grid />
-
-      {/* HTML overlay */}
-      <Html projects={projects} />
     </>
   );
 }
@@ -46,14 +27,12 @@ function ProjectCard({ position, rotation, color, delay }) {
   });
 
   return (
-    <RoundedBox
+    <mesh
       ref={meshRef}
-      args={[1.5, 2, 0.2]}
-      radius={0.05}
-      smoothness={4}
       position={position}
       rotation={rotation}
     >
+      <boxGeometry args={[1.5, 2, 0.2]} />
       <meshStandardMaterial
         color={color}
         emissive={color}
@@ -61,7 +40,7 @@ function ProjectCard({ position, rotation, color, delay }) {
         metalness={0.7}
         roughness={0.3}
       />
-    </RoundedBox>
+    </mesh>
   );
 }
 
@@ -84,19 +63,6 @@ function Grid() {
         opacity={0.2}
       />
     </mesh>
-  );
-}
-
-function Html({ projects }) {
-  return (
-    <div className="projects-overlay">
-      {projects.map((project, index) => (
-        <div key={index} className="project-card">
-          <h3 className="project-title">{project.title}</h3>
-          <p className="project-description">{project.description}</p>
-        </div>
-      ))}
-    </div>
   );
 }
 

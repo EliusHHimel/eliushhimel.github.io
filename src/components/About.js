@@ -1,6 +1,5 @@
 import React, { useRef } from 'react';
 import { useFrame } from '@react-three/fiber';
-import { Sphere, MeshDistortMaterial } from '@react-three/drei';
 
 function About() {
   const sphereRef = useRef();
@@ -8,30 +7,29 @@ function About() {
   useFrame((state) => {
     if (sphereRef.current) {
       sphereRef.current.rotation.y = state.clock.getElapsedTime() * 0.1;
+      const scale = 1 + Math.sin(state.clock.getElapsedTime()) * 0.1;
+      sphereRef.current.scale.set(scale, scale, scale);
     }
   });
 
   return (
     <>
-      {/* Distorted sphere */}
-      <Sphere ref={sphereRef} args={[1.5, 64, 64]} position={[0, 0, 0]}>
-        <MeshDistortMaterial
+      {/* Main sphere */}
+      <mesh ref={sphereRef} position={[0, 0, 0]}>
+        <sphereGeometry args={[1.5, 64, 64]} />
+        <meshStandardMaterial
           color="#ff00ff"
-          attach="material"
-          distort={0.4}
-          speed={2}
-          roughness={0.2}
+          emissive="#ff00ff"
+          emissiveIntensity={0.3}
           metalness={0.8}
+          roughness={0.2}
         />
-      </Sphere>
+      </mesh>
 
       {/* Orbiting spheres */}
       <OrbitingSphere angle={0} radius={3} color="#00ffff" />
       <OrbitingSphere angle={120} radius={3} color="#ff00ff" />
       <OrbitingSphere angle={240} radius={3} color="#ffff00" />
-
-      {/* HTML overlay */}
-      <Html />
     </>
   );
 }
@@ -59,19 +57,6 @@ function OrbitingSphere({ angle, radius, color }) {
         roughness={0.2}
       />
     </mesh>
-  );
-}
-
-function Html() {
-  return (
-    <div className="section-overlay">
-      <h1 className="section-title">ABOUT</h1>
-      <p className="section-description">
-        A passionate software engineer specializing in creating immersive web experiences.
-        Proficient in modern web technologies and 3D graphics. Always exploring new ways
-        to push the boundaries of what's possible on the web.
-      </p>
-    </div>
   );
 }
 

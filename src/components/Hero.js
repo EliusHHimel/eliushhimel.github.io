@@ -1,7 +1,5 @@
-import React, { useRef } from 'react';
+import React, { useRef, useMemo } from 'react';
 import { useFrame } from '@react-three/fiber';
-import { Text3D, Center, Float } from '@react-three/drei';
-import * as THREE from 'three';
 
 function Hero() {
   const geometryRef = useRef();
@@ -11,6 +9,8 @@ function Hero() {
     if (geometryRef.current) {
       geometryRef.current.rotation.x = state.clock.getElapsedTime() * 0.2;
       geometryRef.current.rotation.y = state.clock.getElapsedTime() * 0.3;
+      const scale = 1 + Math.sin(state.clock.getElapsedTime() * 2) * 0.1;
+      geometryRef.current.scale.set(scale, scale, scale);
     }
     
     if (particlesRef.current) {
@@ -20,27 +20,27 @@ function Hero() {
 
   // Create particles
   const particlesCount = 1000;
-  const positions = new Float32Array(particlesCount * 3);
-  
-  for (let i = 0; i < particlesCount * 3; i++) {
-    positions[i] = (Math.random() - 0.5) * 20;
-  }
+  const positions = useMemo(() => {
+    const pos = new Float32Array(particlesCount * 3);
+    for (let i = 0; i < particlesCount * 3; i++) {
+      pos[i] = (Math.random() - 0.5) * 20;
+    }
+    return pos;
+  }, []);
 
   return (
     <>
       {/* Animated central geometry */}
-      <Float speed={2} rotationIntensity={1} floatIntensity={2}>
-        <mesh ref={geometryRef} position={[0, 0, 0]}>
-          <torusKnotGeometry args={[1, 0.3, 128, 32]} />
-          <meshStandardMaterial
-            color="#00ffff"
-            emissive="#00ffff"
-            emissiveIntensity={0.5}
-            metalness={0.8}
-            roughness={0.2}
-          />
-        </mesh>
-      </Float>
+      <mesh ref={geometryRef} position={[0, 0, 0]}>
+        <torusKnotGeometry args={[1, 0.3, 128, 32]} />
+        <meshStandardMaterial
+          color="#00ffff"
+          emissive="#00ffff"
+          emissiveIntensity={0.5}
+          metalness={0.8}
+          roughness={0.2}
+        />
+      </mesh>
 
       {/* Background particles */}
       <points ref={particlesRef}>
@@ -60,23 +60,6 @@ function Hero() {
           sizeAttenuation={true}
         />
       </points>
-
-      {/* HTML overlay */}
-      <Html />
-    </>
-  );
-}
-
-function Html() {
-  return (
-    <>
-      <div className="section-overlay">
-        <h1 className="section-title">SOFTWARE ENGINEER</h1>
-        <p className="section-description">
-          Welcome to an immersive 3D experience. Navigate through interactive sections
-          to explore projects, skills, and more. Use the menu above to explore different areas.
-        </p>
-      </div>
     </>
   );
 }

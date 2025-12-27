@@ -1,17 +1,7 @@
 import React, { useRef, useMemo } from 'react';
 import { useFrame } from '@react-three/fiber';
-import * as THREE from 'three';
 
 function Skills() {
-  const skills = [
-    'JavaScript',
-    'React',
-    'Three.js',
-    'Node.js',
-    'Python',
-    'WebGL'
-  ];
-
   return (
     <>
       {/* Animated skill boxes */}
@@ -23,9 +13,6 @@ function Skills() {
 
       {/* Floating particles */}
       <FloatingParticles />
-
-      {/* HTML overlay */}
-      <Html skills={skills} />
     </>
   );
 }
@@ -93,26 +80,6 @@ function FloatingParticles() {
         sizeAttenuation={true}
       />
     </points>
-  );
-}
-
-function Html({ skills }) {
-  return (
-    <>
-      <div className="section-overlay">
-        <h1 className="section-title">SKILLS</h1>
-        <p className="section-description">
-          Expertise in modern technologies and frameworks for building cutting-edge applications.
-        </p>
-      </div>
-      <div className="skills-overlay">
-        {skills.map((skill, index) => (
-          <div key={index} className="skill-item">
-            {skill}
-          </div>
-        ))}
-      </div>
-    </>
   );
 }
 

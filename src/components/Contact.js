@@ -1,6 +1,5 @@
 import React, { useRef, useMemo } from 'react';
 import { useFrame } from '@react-three/fiber';
-import * as THREE from 'three';
 
 function Contact() {
   return (
@@ -15,9 +14,6 @@ function Contact() {
 
       {/* Star field */}
       <StarField />
-
-      {/* HTML overlay */}
-      <Html />
     </>
   );
 }
@@ -107,19 +103,6 @@ function StarField() {
         sizeAttenuation={true}
       />
     </points>
-  );
-}
-
-function Html() {
-  return (
-    <div className="contact-overlay">
-      <h1 className="contact-title">GET IN TOUCH</h1>
-      <div className="contact-links">
-        <a href="mailto:contact@example.com" className="contact-link">Email</a>
-        <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="contact-link">GitHub</a>
-        <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="contact-link">LinkedIn</a>
-      </div>
-    </div>
   );
 }
 
