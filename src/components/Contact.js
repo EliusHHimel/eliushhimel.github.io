@@ -1,73 +1,109 @@
-import { useState } from "react";
-import { Container, Row, Col } from "react-bootstrap";
-import contactImg from "../assets/img/contact-img.svg";
-import 'animate.css';
-import TrackVisibility from 'react-on-screen';
+import React, { useRef, useMemo } from 'react';
+import { useFrame } from '@react-three/fiber';
 
-export const Contact = () => {
-  const [name, setName] = useState('')
+function Contact() {
+  return (
+    <>
+      {/* Central pulsing sphere */}
+      <PulsingSphere />
 
-  const handleChange = (e) => {
-    setName(e.target.value)
-  }
+      {/* Orbiting rings */}
+      <Ring radius={2} speed={1} color="#00ffff" />
+      <Ring radius={2.5} speed={-0.8} color="#ff00ff" />
+      <Ring radius={3} speed={0.6} color="#ffff00" />
+
+      {/* Star field */}
+      <StarField />
+    </>
+  );
+}
+
+function PulsingSphere() {
+  const sphereRef = useRef();
+
+  useFrame((state) => {
+    if (sphereRef.current) {
+      const time = state.clock.getElapsedTime();
+      const scale = 1 + Math.sin(time * 2) * 0.2;
+      sphereRef.current.scale.set(scale, scale, scale);
+      sphereRef.current.rotation.y = time * 0.3;
+    }
+  });
 
   return (
-    <section className="contact" id="contact">
-      <Container>
-        <Row className="align-items-center">
-          <Col size={12} md={6}>
-            <TrackVisibility>
-              {({ isVisible }) =>
-                <img className={isVisible ? "animate__animated animate__zoomIn" : ""} src={contactImg} alt="Contact Us" />
-              }
-            </TrackVisibility>
-          </Col>
-          <Col size={12} md={6}>
-            <TrackVisibility>
-              {({ isVisible }) =>
-                <div className={isVisible ? "animate__animated" : ""}>
-                  <h2>Get In Touch</h2>
-                  <p className="contact-info">If you have any query please contact me.
-                    <br />
-                    <br />
-                    <i className="fa-duotone fa-envelope"></i> <a href="mailto:contact@eliushhimel.com">contact@eliushhimel.com</a> <br />
-                    <i className="fa-duotone fa-phone" style={{
-                      marginTop: '10px'
-                    }}></i> <a href="tel:+8801866077018">+8801866077018</a>
-                  </p>
-                  <form action="https://formsubmit.co/contact@eliushhimel.com" method="POST">
-                    <input type="text" name="_honey" style={{ display: "none" }} />
-                    <input type="hidden" name="_captcha" value={false} />
-                    <input type="hidden" name="_template" value="table" />
-                    <input type="hidden" name="_subject" value={`You Received an email from ${name}`} />
-                    <input type="hidden" name="_next" value="https://eliushhimel.com/thank-you" />
-                    <Row>
-                      <Col size={12} sm={6} className="px-1">
-                        <input type="text" name="First Name" placeholder="First Name" onChange={handleChange} />
-                      </Col>
-                      <Col size={12} sm={6} className="px-1">
-                        <input type="text" name="Last Name" placeholder="Last Name" />
-                      </Col>
-                      <Col size={12} sm={6} className="px-1">
-                        <input type="email" name="Email" placeholder="Email Address" />
-                      </Col>
-                      <Col size={12} sm={6} className="px-1">
-                        <input type="tel" name="Mobile" placeholder="Phone No." />
-                      </Col>
-                      <Col size={12} className="px-1">
-                        <textarea rows="6" name="Message" placeholder="Message"></textarea>
-                        <button style={{
-                          borderRadius: '10px'
-                        }} type="submit"><span>Send</span></button>
-                      </Col>
-
-                    </Row>
-                  </form>
-                </div>}
-            </TrackVisibility>
-          </Col>
-        </Row>
-      </Container>
-    </section>
-  )
+    <mesh ref={sphereRef}>
+      <sphereGeometry args={[0.8, 64, 64]} />
+      <meshStandardMaterial
+        color="#00ffff"
+        emissive="#00ffff"
+        emissiveIntensity={0.5}
+        metalness={0.9}
+        roughness={0.1}
+      />
+    </mesh>
+  );
 }
+
+function Ring({ radius, speed, color }) {
+  const ringRef = useRef();
+
+  useFrame((state) => {
+    if (ringRef.current) {
+      ringRef.current.rotation.z = state.clock.getElapsedTime() * speed;
+    }
+  });
+
+  return (
+    <mesh ref={ringRef} rotation={[Math.PI / 2, 0, 0]}>
+      <torusGeometry args={[radius, 0.02, 16, 100]} />
+      <meshStandardMaterial
+        color={color}
+        emissive={color}
+        emissiveIntensity={0.3}
+        metalness={0.8}
+        roughness={0.2}
+      />
+    </mesh>
+  );
+}
+
+function StarField() {
+  const starsRef = useRef();
+  
+  const starsCount = 2000;
+  const positions = useMemo(() => {
+    const pos = new Float32Array(starsCount * 3);
+    for (let i = 0; i < starsCount * 3; i++) {
+      pos[i] = (Math.random() - 0.5) * 30;
+    }
+    return pos;
+  }, []);
+
+  useFrame((state) => {
+    if (starsRef.current) {
+      starsRef.current.rotation.y = state.clock.getElapsedTime() * 0.02;
+    }
+  });
+
+  return (
+    <points ref={starsRef}>
+      <bufferGeometry>
+        <bufferAttribute
+          attach="attributes-position"
+          count={starsCount}
+          array={positions}
+          itemSize={3}
+        />
+      </bufferGeometry>
+      <pointsMaterial
+        size={0.02}
+        color="#ffffff"
+        transparent
+        opacity={0.8}
+        sizeAttenuation={true}
+      />
+    </points>
+  );
+}
+
+export default Contact;
