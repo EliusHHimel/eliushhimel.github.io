@@ -1,113 +1,103 @@
-import { Container, Row, Col, Tab } from "react-bootstrap";
-import { ProjectCard } from "./ProjectCard";
-import projImg1 from "../assets/img/projects/Creative-Agency.png";
-import projImg2 from "../assets/img/projects/Asterisk-Travels.png";
-import projImg3 from "../assets/img/projects/drones-world.png";
-import projImg4 from "../assets/img/projects/Optifine-Health-care.png";
-import projImg5 from "../assets/img/projects/Amazing-Football.png";
-import spaceImg from "../assets/img/projects/space.png";
-import colorSharp2 from "../assets/img/color-sharp2.png";
-import 'animate.css';
-import TrackVisibility from 'react-on-screen';
+import React, { useRef } from 'react';
+import { useFrame } from '@react-three/fiber';
+import { RoundedBox } from '@react-three/drei';
 
-export const Projects = () => {
-
+function Projects() {
   const projects = [
     {
-      title: "Stella - Space For Everyone",
-      description: "Stella website.",
-      imgUrl: spaceImg,
-      liveUrl: "https://eliushhimel.com/Space",
-      codeUrl: "https://github.com/EliusHHimel/space"
+      title: '3D Portfolio',
+      description: 'An interactive 3D portfolio website built with Three.js and React Three Fiber'
     },
     {
-      title: "Creative Agency",
-      description: "Creative agency website.",
-      imgUrl: projImg1,
-      liveUrl: "https://creative-agency-a1a4f.firebaseapp.com/",
-      codeUrl: "https://github.com/EliusHHimel/creative-agency"
+      title: 'Web Application',
+      description: 'Full-stack web application with modern technologies and best practices'
     },
     {
-      title: "Asterisk Travels",
-      description: "Travel agency website.",
-      imgUrl: projImg2,
-      liveUrl: "https://asterisk-travels.web.app/",
-      codeUrl: "https://github.com/EliusHHimel/asterisk-travels"
-    },
-    {
-      title: "Drones World",
-      description: "Drone Reseller website.",
-      imgUrl: projImg3,
-      liveUrl: "https://drones-world.eliushhimel.com/",
-      codeUrl: "https://github.com/EliusHHimel/drones-world"
-    },
-    {
-      title: "Optifine Helth Care",
-      description: "Private healthcare organization website.",
-      imgUrl: projImg4,
-      liveUrl: "https://optifine-health.web.app/",
-      codeUrl: "https://github.com/EliusHHimel/optifine-health-care"
-    },
-    {
-      title: "Amazing Football",
-      description: "Football Event Organizer Website",
-      imgUrl: projImg5,
-      liveUrl: "https://football-hero.eliushhimel.com/",
-      codeUrl: "https://github.com/EliusHHimel/Football-Hero"
+      title: 'Mobile App',
+      description: 'Cross-platform mobile application with seamless user experience'
     }
   ];
 
   return (
-    <section className="project" id="project">
-      <Container>
-        <Row>
-          <Col size={12}>
-            <TrackVisibility>
-              {({ isVisible }) =>
-                <div className={isVisible ? "animate__animated" : ""}>
-                  <h2>Projects</h2>
-                  <p>These are the most recent projects I've completed.</p>
-                  <Tab.Container id="projects-tabs" defaultActiveKey="first">
-                    {/* <Nav variant="pills" className="nav-pills mb-5 justify-content-center align-items-center" id="pills-tab">
-                      <Nav.Item>
-                        <Nav.Link eventKey="first">Tab 1</Nav.Link>
-                      </Nav.Item>
-                      <Nav.Item>
-                        <Nav.Link eventKey="second">Tab 2</Nav.Link>
-                      </Nav.Item>
-                      <Nav.Item>
-                        <Nav.Link eventKey="third">Tab 3</Nav.Link>
-                      </Nav.Item>
-                    </Nav> */}
-                    <Tab.Content id="slideInUp" className={isVisible ? "" : ""}>
-                      <Tab.Pane eventKey="first">
-                        <Row>
-                          {
-                            projects.map((project, index) => {
-                              return (
-                                <ProjectCard
-                                  key={index}
-                                  {...project}
-                                />
-                              )
-                            })
-                          }
-                        </Row>
-                      </Tab.Pane>
-                      {/* <Tab.Pane eventKey="section">
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque quam, quod neque provident velit, rem explicabo excepturi id illo molestiae blanditiis, eligendi dicta officiis asperiores delectus quasi inventore debitis quo.</p>
-                      </Tab.Pane>
-                      <Tab.Pane eventKey="third">
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque quam, quod neque provident velit, rem explicabo excepturi id illo molestiae blanditiis, eligendi dicta officiis asperiores delectus quasi inventore debitis quo.</p>
-                      </Tab.Pane> */}
-                    </Tab.Content>
-                  </Tab.Container>
-                </div>}
-            </TrackVisibility>
-          </Col>
-        </Row>
-      </Container>
-      <img className="background-image-right" alt="" src={colorSharp2}></img>
-    </section>
-  )
+    <>
+      {/* Project cards in 3D space */}
+      <ProjectCard position={[-3, 0, 0]} rotation={[0, 0.2, 0]} color="#ff00ff" delay={0} />
+      <ProjectCard position={[0, 0, 0]} rotation={[0, 0, 0]} color="#00ffff" delay={0.2} />
+      <ProjectCard position={[3, 0, 0]} rotation={[0, -0.2, 0]} color="#ffff00" delay={0.4} />
+
+      {/* Grid background */}
+      <Grid />
+
+      {/* HTML overlay */}
+      <Html projects={projects} />
+    </>
+  );
 }
+
+function ProjectCard({ position, rotation, color, delay }) {
+  const meshRef = useRef();
+
+  useFrame((state) => {
+    if (meshRef.current) {
+      const time = state.clock.getElapsedTime();
+      meshRef.current.position.y = position[1] + Math.sin(time * 2 + delay) * 0.3;
+      meshRef.current.rotation.y = rotation[1] + Math.sin(time + delay) * 0.1;
+    }
+  });
+
+  return (
+    <RoundedBox
+      ref={meshRef}
+      args={[1.5, 2, 0.2]}
+      radius={0.05}
+      smoothness={4}
+      position={position}
+      rotation={rotation}
+    >
+      <meshStandardMaterial
+        color={color}
+        emissive={color}
+        emissiveIntensity={0.2}
+        metalness={0.7}
+        roughness={0.3}
+      />
+    </RoundedBox>
+  );
+}
+
+function Grid() {
+  const gridRef = useRef();
+
+  useFrame((state) => {
+    if (gridRef.current) {
+      gridRef.current.position.y = -2 + Math.sin(state.clock.getElapsedTime() * 0.5) * 0.1;
+    }
+  });
+
+  return (
+    <mesh ref={gridRef} rotation={[-Math.PI / 2, 0, 0]} position={[0, -2, 0]}>
+      <planeGeometry args={[20, 20, 20, 20]} />
+      <meshBasicMaterial
+        color="#00ffff"
+        wireframe={true}
+        transparent
+        opacity={0.2}
+      />
+    </mesh>
+  );
+}
+
+function Html({ projects }) {
+  return (
+    <div className="projects-overlay">
+      {projects.map((project, index) => (
+        <div key={index} className="project-card">
+          <h3 className="project-title">{project.title}</h3>
+          <p className="project-description">{project.description}</p>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+export default Projects;
